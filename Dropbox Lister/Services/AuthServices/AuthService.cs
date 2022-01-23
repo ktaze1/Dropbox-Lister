@@ -77,7 +77,8 @@ namespace Dropbox_Lister.Services.AuthServices
                 {
                     var error = JsonConvert.DeserializeObject<GenericError>(await response.Content.ReadAsStringAsync());
                     Console.Error.WriteLine("An Error has occured during authentication: " + error.ErrorSummary);
-                    EnterAppCode();
+
+                    await SetBearerToken(EnterAppCode());
                 }
             }
             else if (string.IsNullOrEmpty(appCode))
